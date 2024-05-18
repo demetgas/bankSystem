@@ -1,4 +1,4 @@
 package com.demetgas.bankSystem.controller;
 
-public class UserController {
+public class AccountController {
 }
