@@ -16,6 +16,11 @@ public class AccountService {
         return accountRep.findAll();
     }
 
+    public Account getAccountById(String id){
+        return accountRep.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found!"));
+
+    }
     public Account createAccount(Account newAccount){
         try {
             return accountRep.save(newAccount);
@@ -25,7 +30,7 @@ public class AccountService {
         }
     }
     public String withdraw(String accountId, double amount) {
-        Account account = accountRep.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+        Account account = getAccountById(accountId);
         if (account.getAccountBalance() < amount) {
             return "Withdrawal Failed!";
         }
@@ -33,6 +38,7 @@ public class AccountService {
         accountRep.save(account);
         return "Withdrawal successful";
     }
+
 
     public String deposit(String accountId, double amount) {
         Account account = accountRep.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
