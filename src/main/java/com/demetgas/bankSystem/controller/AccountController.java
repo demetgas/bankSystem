@@ -25,10 +25,9 @@ public class AccountController {
     public ResponseEntity<Account> createAccount(@RequestBody Account newAccount){
         return new ResponseEntity<>(accountService.createAccount(newAccount),HttpStatus.CREATED);
     }
-    public Account getAccountById(String id){
-        return accountRep.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found!"));
-
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable String id) {
+        return new ResponseEntity<>(accountService.getAccountById(id), HttpStatus.OK);
     }
 
     @PostMapping("/withdraw")
