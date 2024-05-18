@@ -1,6 +1,7 @@
 package com.demetgas.bankSystem.controller;
 
 import com.demetgas.bankSystem.model.Account;
+import com.demetgas.bankSystem.repository.AccountRep;
 import com.demetgas.bankSystem.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final AccountRep accountRep;
 
     @GetMapping
     public ResponseEntity<List<Account>> getAccounts(){
@@ -22,5 +24,20 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account newAccount){
         return new ResponseEntity<>(accountService.createAccount(newAccount),HttpStatus.CREATED);
+    }
+    public Account getAccountById(String id){
+        return accountRep.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found!"));
+
+    }
+
+    @PostMapping("/withdraw")
+    public ResponseEntity<String> withdraw(@RequestParam String accountId, @RequestParam double amount) {
+        return new ResponseEntity<>(accountService.withdraw(accountId, amount), HttpStatus.OK);
+    }
+
+    @PostMapping("/deposit")
+    public ResponseEntity<String> deposit(@RequestParam String accountId, @RequestParam double amount) {
+        return new ResponseEntity<>(accountService.deposit(accountId, amount), HttpStatus.OK);
     }
 }
