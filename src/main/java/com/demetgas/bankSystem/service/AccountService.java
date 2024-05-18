@@ -34,6 +34,13 @@ public class AccountService {
         return "Withdrawal successful";
     }
 
+    public String deposit(String accountId, double amount) {
+        Account account = accountRep.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+        account.setAccountBalance(account.getAccountBalance() + amount);
+        accountRep.save(account);
+        return "Deposit successful";
+    }
+
 
 
 }
