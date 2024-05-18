@@ -25,7 +25,6 @@ public class AccountService {
         try {
             return accountRep.save(newAccount);
         } catch (Exception e) {
-            // Log error and handle exception
             throw new RuntimeException("Error creating a new account!", e);
         }
     }
