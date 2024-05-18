@@ -15,4 +15,8 @@ public class AccountService {
         return accountRep.findAll();
     }
 
+    public Account createAccount(Account newAccount){
+        return accountRep.save(newAccount);
+    }
+
 }
