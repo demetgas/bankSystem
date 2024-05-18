@@ -3,13 +3,13 @@ package com.demetgas.bankSystem.service;
 import com.demetgas.bankSystem.model.Bank;
 import com.demetgas.bankSystem.repository.BankRep;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/bank")
+@Service
 @AllArgsConstructor
 public class BankService {
     private BankRep bankRep;
