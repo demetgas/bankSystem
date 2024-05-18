@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountController {
     private final AccountService accountService;
-    private final AccountRep accountRep;
 
     @GetMapping
     public ResponseEntity<List<Account>> getAccounts(){
