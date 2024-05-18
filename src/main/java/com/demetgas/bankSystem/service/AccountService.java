@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountService {
     private AccountRep accountRep;
+
     public List<Account> getAccounts(){
         return accountRep.findAll();
     }
@@ -23,5 +24,16 @@ public class AccountService {
             throw new RuntimeException("Error creating a new account!", e);
         }
     }
+    public String withdraw(String accountId, double amount) {
+        Account account = accountRep.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+        if (account.getAccountBalance() < amount) {
+            return "Withdrawal Failed!";
+        }
+        account.setAccountBalance(account.getAccountBalance() - amount);
+        accountRep.save(account);
+        return "Withdrawal successful";
+    }
+
+
 
 }
