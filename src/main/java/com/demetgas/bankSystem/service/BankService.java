@@ -22,7 +22,21 @@ public class BankService {
     }
 
     public Bank createBank(Bank newBank){
-        return bankRep.save(newBank);
+        try {
+            return bankRep.save(newBank);
+        } catch (Exception e) {
+            throw new RuntimeException("Error creating a new bank!", e);
+        }
+    }
+
+    public double getTotalTransactionFeeAmount(String bankId) {
+        Bank bank = getBankById(bankId);
+        return bank.getTotalTransactionFeeAmount();
+    }
+
+    public double getTotalTransferAmount(String bankId) {
+        Bank bank = getBankById(bankId);
+        return bank.getTotalTransferAmount();
     }
 
 
