@@ -1,7 +1,9 @@
 package com.demetgas.bankSystem.service;
 
 import com.demetgas.bankSystem.model.Account;
+import com.demetgas.bankSystem.model.Bank;
 import com.demetgas.bankSystem.repository.AccountRep;
+import com.demetgas.bankSystem.repository.BankRep;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AccountService {
+    private final BankRep bankRep;
     private AccountRep accountRep;
 
     public List<Account> getAccounts(){
@@ -27,13 +30,20 @@ public class AccountService {
                 .orElseThrow(() -> new RuntimeException("Account not found!"));
         return account.getAccountBalance();
     }
-    public Account createAccount(Account newAccount){
+    public Account createAccount(Account newAccount) {
         try {
-            return accountRep.save(newAccount);
+            String bankId = newAccount.getBankId();
+            Bank bank = bankRep.findById(bankId)
+                    .orElseThrow(() -> new RuntimeException("Bank not found!"));
+            bank.getAccountList().add(newAccount);
+            bankRep.save(bank);
+            return newAccount;
         } catch (Exception e) {
             throw new RuntimeException("Error creating a new account!", e);
         }
     }
+
+
     public void withdraw(String accountId, double amount) {
         Account account = getAccountById(accountId);
         if (account.getAccountBalance() < amount) {

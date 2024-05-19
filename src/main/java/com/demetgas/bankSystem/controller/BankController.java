@@ -1,5 +1,6 @@
 package com.demetgas.bankSystem.controller;
 
+import com.demetgas.bankSystem.model.Account;
 import com.demetgas.bankSystem.model.Bank;
 import com.demetgas.bankSystem.service.BankService;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,12 @@ public class BankController {
     @GetMapping("/{id}/totalTransferAmount")
     public ResponseEntity<Double> getTotalTransferAmount(@PathVariable String id){
         return new ResponseEntity<>(bankService.getTotalTransferAmount(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/accounts")
+        public ResponseEntity<List<Account>> getAccounts(@PathVariable String id){
+            return new ResponseEntity<>(bankService.getAccounts(id),HttpStatus.OK);
+
     }
 
 }

@@ -20,4 +20,9 @@ public class Bank {
     private double totalTransferAmount;
     private double transactionFlatFeeAmount;
     private double transactionPercentFeeValue;
+
+    public Bank(String bankId, String bankName){
+        this.bankId = bankId;
+        this.bankName=bankName;
+    }
 }

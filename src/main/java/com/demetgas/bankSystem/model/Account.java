@@ -13,4 +13,5 @@ public class Account {
     private String accountID;
     private String username;
     private double accountBalance;
+    private String bankId;
 }
