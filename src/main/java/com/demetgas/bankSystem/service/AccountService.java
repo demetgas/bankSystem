@@ -32,8 +32,7 @@ public class AccountService {
     }
     public Account createAccount(Account newAccount) {
         try {
-            String bankId = newAccount.getBankId();
-            Bank bank = bankRep.findById(bankId)
+            Bank bank = bankRep.findById(newAccount.getBankId())
                     .orElseThrow(() -> new RuntimeException("Bank not found!"));
             bank.getAccountList().add(newAccount);
             bankRep.save(bank);
