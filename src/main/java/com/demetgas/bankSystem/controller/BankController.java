@@ -30,4 +30,13 @@ public class BankController {
         return new ResponseEntity<>(bankService.createBank(newBank),HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}/totalFeeAmount")
+    public ResponseEntity<Double> getTotalFeeAmount(@PathVariable String id){
+        return new ResponseEntity<>(bankService.getTotalTransactionFeeAmount(id),HttpStatus.OK);
+    }
+    @GetMapping("/{id}/totalTransferAmount")
+    public ResponseEntity<Double> getTotalTransferAmount(@PathVariable String id){
+        return new ResponseEntity<>(bankService.getTotalTransferAmount(id),HttpStatus.OK);
+    }
+
 }
