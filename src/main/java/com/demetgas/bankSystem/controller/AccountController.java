@@ -29,6 +29,11 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAccountById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Double> getAccountBalance(@PathVariable String id){
+        return new ResponseEntity<>(accountService.getAccountBalance(id),HttpStatus.OK);
+    }
+
     @PostMapping("/withdraw")
     public ResponseEntity<String> withdraw(@RequestParam String accountId, @RequestParam double amount) {
         return new ResponseEntity<>(accountService.withdraw(accountId, amount), HttpStatus.OK);

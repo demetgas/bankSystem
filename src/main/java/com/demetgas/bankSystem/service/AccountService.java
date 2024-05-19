@@ -21,6 +21,12 @@ public class AccountService {
                 .orElseThrow(() -> new RuntimeException("Account not found!"));
 
     }
+
+    public double getAccountBalance(String id) {
+        Account account = accountRep.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found!"));
+        return account.getAccountBalance();
+    }
     public Account createAccount(Account newAccount){
         try {
             return accountRep.save(newAccount);
