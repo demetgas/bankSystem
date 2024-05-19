@@ -36,7 +36,7 @@ public class AccountService {
                     .orElseThrow(() -> new RuntimeException("Bank not found!"));
             bank.getAccountList().add(newAccount);
             bankRep.save(bank);
-            return newAccount;
+            return accountRep.save(newAccount);
         } catch (Exception e) {
             throw new RuntimeException("Error creating a new account!", e);
         }
