@@ -1,5 +1,6 @@
 package com.demetgas.bankSystem.service;
 
+import com.demetgas.bankSystem.model.Account;
 import com.demetgas.bankSystem.model.Bank;
 import com.demetgas.bankSystem.repository.BankRep;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,11 @@ public class BankService {
     public Bank getBankById(String id){
         return bankRep.findById(id)
                 .orElseThrow(()-> new RuntimeException("Bank not found!"));
+    }
+
+    public List<Account> getAccounts(String bankId) {
+        Bank bank = getBankById(bankId);
+        return bank.getAccountList();
     }
 
     public Bank createBank(Bank newBank){
