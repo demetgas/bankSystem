@@ -25,4 +25,16 @@ public class Bank {
         this.bankId = bankId;
         this.bankName=bankName;
     }
+
+    public void addAccount(Account account){
+        try {
+            if (bankId.equals(account.getBankId())){
+                accountList.add(account);
+            }
+        }catch (Exception e){
+            throw new RuntimeException("Error", e);
+
+        }
+
+    }
 }

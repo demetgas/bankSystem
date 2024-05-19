@@ -14,4 +14,9 @@ public class Account {
     private String username;
     private double accountBalance;
     private String bankId;
+
+    public Account(String accountID, String bankId){
+        this.accountID = accountID;
+        this.bankId = bankId;
+    }
 }
