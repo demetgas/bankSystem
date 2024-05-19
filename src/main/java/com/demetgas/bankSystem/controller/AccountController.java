@@ -29,18 +29,20 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAccountById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Double> getAccountBalance(@PathVariable String id){
-        return new ResponseEntity<>(accountService.getAccountBalance(id),HttpStatus.OK);
+    @GetMapping("/{id}/balance")
+    public ResponseEntity<Double> getAccountBalance(@PathVariable String id) {
+        return new ResponseEntity<>(accountService.getAccountBalance(id), HttpStatus.OK);
     }
 
-    @PostMapping("/withdraw")
-    public ResponseEntity<String> withdraw(@RequestParam String accountId, @RequestParam double amount) {
-        return new ResponseEntity<>(accountService.withdraw(accountId, amount), HttpStatus.OK);
+    @PostMapping("/{id}/withdraw")
+    public ResponseEntity<String> withdraw(@PathVariable String id, @RequestParam double amount) {
+        accountService.withdraw(id, amount);
+        return new ResponseEntity<>("Withdrawal successful", HttpStatus.OK);
     }
 
-    @PostMapping("/deposit")
-    public ResponseEntity<String> deposit(@RequestParam String accountId, @RequestParam double amount) {
-        return new ResponseEntity<>(accountService.deposit(accountId, amount), HttpStatus.OK);
+    @PostMapping("/{id}/deposit")
+    public ResponseEntity<String> deposit(@PathVariable String id, @RequestParam double amount) {
+        accountService.deposit(id, amount);
+        return new ResponseEntity<>("Deposit successful", HttpStatus.OK);
     }
 }
