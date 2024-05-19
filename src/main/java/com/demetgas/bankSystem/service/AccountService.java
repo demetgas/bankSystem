@@ -34,21 +34,19 @@ public class AccountService {
             throw new RuntimeException("Error creating a new account!", e);
         }
     }
-    public double withdraw(String accountId, double amount) {
+    public void withdraw(String accountId, double amount) {
         Account account = getAccountById(accountId);
         if (account.getAccountBalance() < amount) {
             throw new RuntimeException("Withdrawal Failed!");
         }
         account.setAccountBalance(account.getAccountBalance() - amount);
         accountRep.save(account);
-        return amount;
     }
-    
-    public double deposit(String accountId, double amount) {
+
+    public void deposit(String accountId, double amount) {
         Account account = accountRep.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found"));
         account.setAccountBalance(account.getAccountBalance() + amount);
         accountRep.save(account);
-        return amount;
     }
 
 
